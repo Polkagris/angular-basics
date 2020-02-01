@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { ListComponent } from "./list/list.component";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

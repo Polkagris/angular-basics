@@ -16,7 +16,20 @@
   </p>
 </div>
 
-<div class="play-container">
+<div
+  class="play-container"
+  [style.background-color]="clickCounter > 4 ? 'yellow' : 'lightgray'"
+>
+  <ng-template [ngIf]="clickCounter > 4" [ngIfElse]="none">
+    <p>The clickCounter is greater than 4</p>
+  </ng-template>
+
+  <ng-template #none>
+    <p>The clickCounter is less than 4</p>
+  </ng-template>
+</div>
+
+<div class="play-container" [class.active]="clickCounter > 4">
   <ng-template [ngIf]="clickCounter > 4" [ngIfElse]="none">
     <p>The clickCounter is greater than 4</p>
   </ng-template>
