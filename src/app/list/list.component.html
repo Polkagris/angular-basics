@@ -1,9 +1,28 @@
 <h1>Breweries</h1>
 
-<ul *ngIf="brews">
+<!-- <ul *ngIf="brews">
   <li *ngFor="let brew of brews">
     <p>{{ brew.name }}</p>
     <p>{{ brew.country }}</p>
     <a href="{{ brew.website_url }}">{{ brew.website_url }}</a>
   </li>
+</ul> -->
+<div class="play-container">
+  <p>
+    <span>Årsregnskap filter: </span><input type="text" [(ngModel)]="name" />
+    <br />
+    <strong>You said: </strong> {{ name }}
+  </p>
+</div>
+
+<ul *ngIf="excelArray">
+  <li *ngFor="let excel of excelArray">
+    <p>{{ excel.aarsresultat }}</p>
+  </li>
 </ul>
+
+<highcharts-chart
+  [Highcharts]="Highcharts"
+  [options]="chartOptions"
+  style="width: 100%; height: 400px; display: block;"
+></highcharts-chart>

@@ -8,6 +8,7 @@ import { ListComponent } from "./list/list.component";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
+import { HighchartsChartModule } from "highcharts-angular";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
