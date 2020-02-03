@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { HttpService } from "../http.service";
 import * as Highcharts from "highcharts";
 
@@ -8,9 +8,11 @@ import * as Highcharts from "highcharts";
   styleUrls: ["./list.component.css"]
 })
 export class ListComponent implements OnInit {
+  @Input() result: any;
+
   brews: Object;
   business: Object;
-  name: number = 0;
+  //result: number = 0;
   excelArray: Array<Object> = [
     {
       orgnr: 1091,
@@ -33,41 +35,49 @@ export class ListComponent implements OnInit {
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
+    chart: {
+      type: "column"
+    },
     series: [
       {
         name: "Random data",
         data: (function() {
           // generate an array of random data
-          var data = [],
+          let data = [],
             time = new Date().getTime(),
             i,
-            excel = [97000, 95290, 47111],
             excelObjects = [
               {
-                orgnr: 1091,
-                aarsresultat: 97000,
-                bransjekode: 997539222
+                aarsresultat: "897605082",
+                orgnr: "200",
+                bransjekode: "68209",
+                bransje: "Utleie av egen eller leid fast eiendom ellers"
               },
               {
-                orgnr: 3981,
-                aarsresultat: 95290,
-                bransjekode: 997558510
+                aarsresultat: "997539222",
+                orgnr: "1091",
+                bransjekode: "97000",
+                bransje: "Lønnet arbeid i private husholdninger"
               },
               {
-                orgnr: 67881,
-                aarsresultat: 47111,
-                bransjekode: 997615018
+                aarsresultat: "997558510",
+                orgnr: "3981",
+                bransjekode: "95290",
+                bransje:
+                  "Reparasjon av andre husholdningsvarer og varer til personlig bruk"
               }
             ];
 
           for (i = 0; i < 3; i += 1) {
             data.push({
-              x: excelObjects[i].orgnr,
-              y: excelObjects[i].aarsresultat,
-              addPoint([x, y]);
+              x: parseInt(excelObjects[i].orgnr), //$(js_city[i]).text()
+              y: parseInt(excelObjects[i].aarsresultat)
             });
           }
-          return data;
+          // filter here
+          //let highNumber = this.result;
+          let filteredList = data.filter(d => parseInt(d.y) > this.result);
+          return filteredList;
         })()
       }
     ]
@@ -81,6 +91,7 @@ export class ListComponent implements OnInit {
       this.brews = data;
       console.log(this.brews);
     });
+
     // this.chartOptions.series[0].data.y = this.excelArray2;
     //this.excelArray2 = [97000, 95290, 47111];
     console.log("data from init:", this.chartOptions.series);
